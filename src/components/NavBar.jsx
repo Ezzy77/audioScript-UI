@@ -1,8 +1,9 @@
+import { Link } from "react-router-dom";
 
 
 export default function NavBar() {
     return (
-        <div className="navbar bg-base-100 ">
+        <div className="navbar flex justify-between  bg-base-100 ">
             <div className="navbar-start">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -14,22 +15,35 @@ export default function NavBar() {
                     </div>
                     <ul tabIndex={0}
                         className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-                        <li><a>Home</a></li>
-                        <li><a>Transcribe</a></li>
-                        <li><a>Translate</a></li>
+                        <li>
+                            <Link to="/">Home</Link>
+                        </li>
+                        <li>
+                            <Link to="/Transcribe">Transcribe</Link>
+                        </li>
+                        <li>
+                            <Link to="/Translate">Translate</Link>
+                        </li>
                     </ul>
                 </div>
-                <a className="btn btn-ghost text-xl">audioScript</a>
+                <Link className="btn btn-ghost text-xl ml-10" to="/">audioScript</Link>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
-                    <li><a>Home</a></li>
-                    <li><a>Transcribe</a></li>
-                    <li><a>Translate</a></li>
+                    <li>
+                        <Link to="/">Home</Link>
+                    </li>
+                    <li>
+                        <Link to="/Transcribe">Transcribe</Link>
+                    </li>
+                    <li>
+                        <Link to="/Translate">Translate</Link>
+                    </li>
                 </ul>
             </div>
-            <div className="navbar-end">
-                <a className="btn">Login</a>
+            <div className="navbar-end mr-10">
+                <Link to="/Login" className="btn">Login</Link>
+                {/*<a href={} className="btn">Login</a>*/}
             </div>
             {/*<div className="navbar-end">*/}
             {/*    <a className="btn">Logout</a>*/}
