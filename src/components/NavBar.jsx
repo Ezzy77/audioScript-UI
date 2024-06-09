@@ -19,10 +19,10 @@ export default function NavBar() {
                             <Link to="/">Home</Link>
                         </li>
                         <li>
-                            <Link to="/Transcribe">Transcribe</Link>
+                            <Link to="/Transcribe">Transcription</Link>
                         </li>
                         <li>
-                            <Link to="/Translate">Translate</Link>
+                            <Link to="/Translate">Translation</Link>
                         </li>
                     </ul>
                 </div>
@@ -34,10 +34,10 @@ export default function NavBar() {
                         <Link to="/">Home</Link>
                     </li>
                     <li>
-                        <Link to="/Transcribe">Transcribe</Link>
+                        <Link to="/Transcribe">Transcription</Link>
                     </li>
                     <li>
-                        <Link to="/Translate">Translate</Link>
+                        <Link to="/Translate">Translation</Link>
                     </li>
                 </ul>
             </div>
