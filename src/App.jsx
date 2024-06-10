@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Login from "./Login.jsx";
 import Transcribe from "./Transcribe.jsx";
 import Translate from "./Translate.jsx";
+import DevelopmentNotice from "./components/DevelopmetNotice.jsx";
 
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
   return (
       <Router >
           <>
+              <DevelopmentNotice />
               <NavBar />
               <Routes>
                   <Route path="/" element={<Home />} />
