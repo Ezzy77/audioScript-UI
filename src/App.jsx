@@ -6,6 +6,9 @@ import Login from "./Login.jsx";
 import Transcribe from "./Transcribe.jsx";
 import Translate from "./Translate.jsx";
 import DevelopmentNotice from "./components/DevelopmetNotice.jsx";
+import Register from "./Register.jsx";
+import Verify from "./Verify.jsx";
+// import EmailVerification from "./EmailVerification.jsx";
 
 
 function App() {
@@ -13,17 +16,18 @@ function App() {
 
   return (
       <Router >
-          <>
-              <DevelopmentNotice />
-              <NavBar />
-              <Routes>
-                  <Route path="/" element={<Home />} />
-                  <Route path="/Login" element={<Login />} />
-                  <Route path="/Transcribe" element={<Transcribe />} />
-                  <Route path="/Translate" element={<Translate />} />
-              </Routes>
-              <Footer />
-          </>
+          <DevelopmentNotice />
+          <NavBar />
+          <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/login" element={<Login />} />
+              <Route path={"/register"} element={<Register />} />
+              <Route path="/transcribe" element={<Transcribe />} />
+              <Route path="translate" element={<Translate />} />
+              <Route path="/verify" element={<Verify />} />
+              {/*<Route path="/auth/verify-email" element={<EmailVerification />} />*/}
+          </Routes>
+          <Footer />
       </Router>
   )
 }

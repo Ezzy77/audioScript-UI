@@ -2,13 +2,14 @@ import {useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
 import { supabase } from './supabaseClient';
 
-export default  function Login() {
-    const navigate = useNavigate();
+
+export default function Register(){
+    const navigate = useNavigate()
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [firstName, setFirstname] = useState('');
+    const [lastName, setLastname] = useState('');
     const [error, setError] = useState('');
-
-
     const [loading, setLoading] = useState(false); // New state variable for loading
 
 
@@ -16,25 +17,26 @@ export default  function Login() {
         e.preventDefault();
 
         setLoading(true);
-
-        const {data, error} = await supabase.auth.signInWithPassword({
+        const { user, session, error } = await supabase.auth.signUp({
             email,
-            password
+            password,
+            options:{
+                emailRedirectTo: `${location.origin}/login`
+            }
         });
 
         setLoading(false);
-
         if (error) {
-            console.log(error)
             setError(error.message);
-            return;
+                return;
+        }
+        if (!error){
+            navigate('/verify')
+            setError('User Created Successfully');
         }
 
-        if (data) {
-            console.log(data);
-            navigate('/');
-            setError('Login Successful');
-        }
+        console.log(user, session);
+
     };
 
     return (
@@ -42,6 +44,20 @@ export default  function Login() {
             <div className="hero-content flex-col lg:flex-row-reverse justify-between">
                 <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100 mr-20">
                     <form className="card-body" onSubmit={handleSubmit}>
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text">First Name</span>
+                            </label>
+                            <input type="text" placeholder="first name" className="input input-bordered" required
+                                   value={firstName} onChange={(e) => setFirstname(e.target.value)}
+                            />
+                            <label className="label">
+                                <span className="label-text">Last Name</span>
+                            </label>
+                            <input type="text" placeholder="last name" className="input input-bordered" required
+                                   value={lastName} onChange={(e) => setLastname(e.target.value)}
+                            />
+                        </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Email</span>
@@ -61,13 +77,13 @@ export default  function Login() {
                         <div className="form-control mt-6">
                             <button className="btn btn-primary" disabled={loading}>
                                 {loading ? <span className="loading loading-spinner loading-lg"></span>
-                                    : 'Login'}
+                                    : 'Register'}
                             </button>
                         </div>
                         {error && <p className="text-red-500">{error}</p>}
                     </form>
                     <div className="text-center mt-4">
-                        <p className="py-6">Don't have an account? <Link to="/register">Register</Link></p>
+                        <p className="py-6">Already have an account? <Link to="/login">Login</Link></p>
                     </div>
                 </div>
             </div>
