@@ -27,8 +27,9 @@ export default function Register(){
 
         setLoading(false);
         if (error) {
+            console.log(error.message)
             setError(error.message);
-                return;
+            return;
         }
         if (!error){
             navigate('/verify')

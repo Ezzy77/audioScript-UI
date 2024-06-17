@@ -25,13 +25,11 @@ export default  function Login() {
         setLoading(false);
 
         if (error) {
-            console.log(error)
             setError(error.message);
             return;
         }
 
         if (data) {
-            console.log(data);
             navigate('/');
             setError('Login Successful');
         }
