@@ -10,14 +10,18 @@ export default function Register(){
     const [firstName, setFirstname] = useState('');
     const [lastName, setLastname] = useState('');
     const [error, setError] = useState('');
-    const [loading, setLoading] = useState(false); // New state variable for loading
-
+    const [loading, setLoading] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        // Save user data to local storage, then when email is verified, it used to create a user profile
+        localStorage.setItem('email', email);
+        localStorage.setItem('firstName', firstName);
+        localStorage.setItem('lastName', lastName);
+
         setLoading(true);
-        const { user, session, error } = await supabase.auth.signUp({
+        const { error } = await supabase.auth.signUp({
             email,
             password,
             options:{
@@ -27,7 +31,6 @@ export default function Register(){
 
         setLoading(false);
         if (error) {
-            console.log(error.message)
             setError(error.message);
             return;
         }
@@ -35,8 +38,6 @@ export default function Register(){
             navigate('/verify')
             setError('User Created Successfully');
         }
-
-        console.log(user, session);
 
     };
 

@@ -7,6 +7,7 @@ export default function EmailVerification() {
     const location = useLocation();
     const navigate = useNavigate();
 
+
     useEffect(() => {
         const verifyEmail = async () => {
             console.log('Starting email verification process...');
@@ -25,10 +26,10 @@ export default function EmailVerification() {
                     } else {
                         setMessage('Email verified successfully!');
                         console.log('Email verified. Redirecting to login...');
+
                         setTimeout(() => {
-                            navigate('/login');
-                            console.log('Redirection to login page executed.');
-                        }, 2000); // Redirect after 2 seconds
+                            navigate('/');
+                        }, 1000); // Redirect after 2 seconds
                     }
                 } catch (err) {
                     console.error('Unexpected error:', err);
@@ -40,13 +41,15 @@ export default function EmailVerification() {
             }
         };
 
-        verifyEmail();
+
+        verifyEmail().then(() => setMessage('Email verification process completed.'))
+            .catch(() => console.error('Error during email verification'));
     }, [location, navigate]);
 
     return (
         <div>
             <h2>Email Verification</h2>
-            <p>{message}</p>
+               <p>{message}</p>
         </div>
     );
 }

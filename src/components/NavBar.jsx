@@ -19,10 +19,10 @@ export default function NavBar({ user }) {
                         {user && (
                             <>
                                 <li>
-                                    <Link to="/Transcribe">Transcription</Link>
+                                    <Link to="/Transcription">Transcription</Link>
                                 </li>
                                 <li>
-                                    <Link to="/Translate">Translation</Link>
+                                    <Link to="/Translation">Translation</Link>
                                 </li>
                             </>
                         )}
@@ -50,10 +50,10 @@ export default function NavBar({ user }) {
                     {user && (
                         <>
                             <li>
-                                <Link to="/Transcribe">Transcription</Link>
+                                <Link to="/Transcription">Transcription</Link>
                             </li>
                             <li>
-                                <Link to="/Translate">Translation</Link>
+                                <Link to="/Translation">Translation</Link>
                             </li>
                         </>
                     )}

@@ -9,7 +9,7 @@ the platform provides powerful tools for speech-to-text transcription, document 
 ## Features
 
 - **Speech-to-Text Transcription**: Effortlessly transcribe spoken language into text with high accuracy and speed.
-- **Document Translation**: Translate documents between languages while preserving formatting and structure.
+- **Document Translation**: Translation documents between languages while preserving formatting and structure.
 - **Multi-Modal Translation**: Support for various input formats, including speech, text, and documents, for maximum flexibility.
 
 [//]: # (- **Real-Time Collaboration**: Enable real-time translation and collaboration in meetings, presentations, and discussions.)

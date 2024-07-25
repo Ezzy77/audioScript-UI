@@ -1,7 +1,7 @@
 import {useState} from "react";
 import axios from "axios";
 
-export default function Transcribe(){
+export default function Transcription(){
     const [selectedFile, setSelectedFile] = useState();
     const [selected, setSelected] = useState(false);
     const [uploadPercentage, setUploadPercentage] = useState(0);

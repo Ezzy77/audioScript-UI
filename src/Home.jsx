@@ -1,3 +1,4 @@
+import {Link} from "react-router-dom";
 
 export default function Home() {
     return (
@@ -6,18 +7,21 @@ export default function Home() {
                 <div className="max-w-md">
                     <h1 className="text-5xl font-bold">Welcome to audioScript</h1>
                     <p className="py-6">
-                        Welcome to AudioScript, where language
-                        barriers are a thing of the past. Unlock seamless
+                        Where language barriers are a thing of the past. Unlock seamless
                         communication and global connectivity with our
                         innovative AI powered speech-to-text and document
-                        translation solutions.
+                        translation solution.
                     </p>
                     <p className="py-6">
                         From effortlessly transcribing meetings to translating documents
                         with precision, empower your team to collaborate across languages
                         and cultures like never before.
                     </p>
-                    <button className="btn btn-primary">Get Started</button>
+                    <Link to="/transcribe">
+                        <button className="btn btn-primary">
+                            Get Started
+                        </button>
+                    </Link>
                 </div>
             </div>
         </div>
