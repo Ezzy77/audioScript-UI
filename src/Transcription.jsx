@@ -78,7 +78,7 @@ export default function Transcription(){
                 <div className="card w-full md:w-96 h-auto bg-base-100 shadow-xl">
                     <div className="card-body">
                         <div className="flex flex-col w-full items-stretch justify-start space-y-4">
-                            <h1 className="text-3xl font-bold mb-6">Transcribe Audio</h1>
+                            <h3 className="text-xl font-bold mb-6">Transcribe Audio</h3>
                             <input
                                 type="file"
                                 onChange={fileSelectedHandler}
@@ -99,7 +99,7 @@ export default function Transcription(){
                 </div>
                 <div className="card w-full md:w-1/2 h-auto  bg-base-100 shadow-xl">
                     <div className="card-body">
-                        <h2 className="card-title">Transcription Result</h2>
+                        <h3 className="card-title">Transcription Result</h3>
                         {/* Player for the audio goes here */}
                         <div className="p-4 flex flex-row justify-between">
                             <audio controls>
