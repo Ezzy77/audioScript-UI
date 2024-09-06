@@ -21,9 +21,6 @@ export default function NavBar({ user }) {
                                 <li>
                                     <Link to="/Transcription">Transcription</Link>
                                 </li>
-                                <li>
-                                    <Link to="/Translation">Translation</Link>
-                                </li>
                             </>
                         )}
                         {user ? (
@@ -51,9 +48,6 @@ export default function NavBar({ user }) {
                         <>
                             <li>
                                 <Link to="/Transcription">Transcription</Link>
-                            </li>
-                            <li>
-                                <Link to="/Translation">Translation</Link>
                             </li>
                         </>
                     )}

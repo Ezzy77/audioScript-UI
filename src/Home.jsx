@@ -17,7 +17,7 @@ export default function Home() {
                         with precision, empower your team to collaborate across languages
                         and cultures like never before.
                     </p>
-                    <Link to="/transcribe">
+                    <Link to="/transcription">
                         <button className="btn btn-primary">
                             Get Started
                         </button>
