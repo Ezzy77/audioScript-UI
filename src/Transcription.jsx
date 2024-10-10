@@ -1,7 +1,7 @@
-import {useState} from "react";
+import { useState } from "react";
 import axios from "axios";
 
-export default function Transcription(){
+export default function Transcription() {
     const [selectedFile, setSelectedFile] = useState();
     const [selected, setSelected] = useState(false);
     const [uploadPercentage, setUploadPercentage] = useState(0);
@@ -9,18 +9,50 @@ export default function Transcription(){
     const [transcribing, setTranscribing] = useState(false);
     const [isLoadingUpload, setIsLoadingUpload] = useState(false);
     const [isLoadingTranscription, setIsLoadingTranscription] = useState(false);
+    const [error, setError] = useState(""); // State to manage error messages
 
     const fileSelectedHandler = event => {
-        setSelectedFile(event.target.files[0]);
-        setSelected(true);
+        const file = event.target.files[0];
+        if (file) {
+            setSelectedFile(file);
+            setSelected(true);
+
+            if (file.type.startsWith('video/')) {
+                const videoElement = document.createElement('video');
+                videoElement.src = URL.createObjectURL(file);
+
+                videoElement.onloadedmetadata = () => {
+                    const duration = videoElement.duration; // Duration in seconds
+                    URL.revokeObjectURL(videoElement.src);
+
+                    if (duration > 300) { // 5 minutes = 300 seconds
+                        setError('The video exceeds the maximum allowed duration of 5 minutes.');
+                        setSelected(false);
+                    } else {
+                        setError('');
+                        setSelected(true);
+                    }
+                };
+
+                videoElement.onerror = () => {
+                    setError('Failed to load video metadata.');
+                    setSelected(false);
+                };
+            } else {
+                setError('Please select a video file.');
+                setSelected(false);
+            }
+        }
     };
 
     const fileUploadHandler = async () => {
+        if (!selectedFile) return;
+
         setIsLoadingUpload(true);
         const fd = new FormData();
         fd.append("file", selectedFile);
         try {
-            const res = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/v1/api/upload`, fd,{
+            const res = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/v1/api/upload`, fd, {
                 onUploadProgress: ProgressEvent => {
                     const progress = Math.round((ProgressEvent.loaded / ProgressEvent.total) * 100);
                     if (progress < 100) {
@@ -35,12 +67,12 @@ export default function Transcription(){
                 language_code: 'en-US' // Replace with the actual language code
             };
             await startTranscriptionJob(job);
-        } catch(err) {
+        } catch (err) {
             console.error('Error:', err);
             setUploadPercentage(0);
         }
         setIsLoadingUpload(false);
-        setUploadPercentage(0)
+        setUploadPercentage(0);
     };
 
     const startTranscriptionJob = async (job) => {
@@ -49,7 +81,7 @@ export default function Transcription(){
         try {
             const response = await axios.post(
                 `${import.meta.env.VITE_API_BASE_URL}/v1/api/transcript`,
-                 job,
+                job,
                 {
                     headers: {
                         'Content-Type': 'application/json',
@@ -83,8 +115,8 @@ export default function Transcription(){
                                 type="file"
                                 onChange={fileSelectedHandler}
                                 className="file-input file-input-bordered"/>
-                            <progress className="progress progress-success" value={uploadPercentage}
-                                      max="100"></progress>
+                            {error && <p className="text-red-500">{error}</p>}
+                            <progress className="progress progress-success" value={uploadPercentage} max="100"></progress>
                             <button
                                 onClick={fileUploadHandler}
                                 disabled={!selected || isLoadingUpload || isLoadingTranscription}
@@ -99,7 +131,7 @@ export default function Transcription(){
                 </div>
                 <div className="card w-full md:w-1/2 h-auto  bg-base-100 shadow-xl">
                     <div className="card-body">
-                        <h3 className="card-title">Transcription Result</h3>
+                        <h2 className="card-title">Transcription Result</h2>
                         {/* Player for the audio goes here */}
                         <div className="p-4 flex flex-row justify-between">
                             <audio controls>
@@ -121,12 +153,10 @@ export default function Transcription(){
                             <button className="btn " disabled={!transcription || isLoadingUpload || isLoadingTranscription}>
                                 Download Transcript
                             </button>
-
                         </div>
                     </div>
                 </div>
             </div>
         </>
-
     );
 }
